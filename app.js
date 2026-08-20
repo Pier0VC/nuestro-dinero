@@ -6,7 +6,7 @@ const db=getFirestore(initializeApp(firebaseConfig));
 const cats=[['comida','Comida','🍜','GASTO'],['transporte','Transporte','🚗','GASTO'],['salidas','Salidas','✨','GASTO'],['entretenimiento','Entretenimiento','🎬','GASTO'],['compras','Compras','🛍️','GASTO'],['hogar','Hogar','⌂','GASTO'],['salud','Salud','✚','GASTO'],['estudios','Estudios','▣','GASTO'],['suscripciones','Suscripciones','↻','GASTO'],['viajes','Viajes','✈','GASTO'],['regalos','Regalos','🎁','GASTO'],['otros','Otros','•••','GASTO'],['sueldo','Sueldo','▤','INGRESO'],['pago','Pago','▤','INGRESO'],['freelance','Freelance','▤','INGRESO'],['reembolso','Reembolso','↶','INGRESO'],['otros-ingresos','Otros ingresos','＋','INGRESO']];
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN'}).format(+n||0), pad=n=>String(n).padStart(2,'0');
 const methods=['EFECTIVO','YAPE','PLIN','TARJETA','TRANSFERENCIA','OTRO'];
-const VERSION='v1.2.1';
+const VERSION='v1.2.2';
 const S={user:localStorage.ndUser||'',route:'home',month:ym(),moves:[],budget:null,edit:null};
 function today(){const d=new Date;return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}function ym(){return today().slice(0,7)}function moveMonth(delta){let[y,m]=S.month.split('-').map(Number);const d=new Date(y,m-1+delta,1);S.month=`${d.getFullYear()}-${pad(d.getMonth()+1)}`;load()}
 function monthName(){return new Intl.DateTimeFormat('es-PE',{month:'long',year:'numeric'}).format(new Date(`${S.month}-01T12:00:00`))}function cat(id){return cats.find(c=>c[0]===id)||['otros','Otros','•','GASTO']}
@@ -33,6 +33,22 @@ body.theme-piero{background:#e8eef9}body.theme-mafer{background:#eaf8ff}body.the
 #movement-preview{display:block;margin:4px 0 8px;color:#0369a1;font-size:.8rem;font-weight:700}
 </style>`);
 document.head.insertAdjacentHTML('beforeend',`<style>
+body.theme-piero{background:#090f1d!important;color:#f7fbff!important}
+body.theme-piero .shell{color:#f7fbff!important}
+body.theme-piero .card,body.theme-piero .list{background:linear-gradient(145deg,#101b30,#172742)!important;border-color:#334b6d!important}
+body.theme-piero .month{background:#111d33!important;border-color:#3b5274!important;color:#fff!important}
+body.theme-piero .month b{color:#fff!important}
+body.theme-piero .balance:after{border-color:#fb718544!important}
+body.theme-piero .nav{background:#0a1322f5!important;border-color:#304664!important}
+body.theme-piero .grid .card,body.theme-piero .budget{background:linear-gradient(145deg,#111d32,#1a2b47)!important}
+body.theme-piero .progress,body.theme-piero .bar{background:#314765!important}
+body.theme-piero .progress i,body.theme-piero .bar i{background:linear-gradient(90deg,#fb7185,#fda4af)!important}
+body.theme-piero .card *,body.theme-piero .list .item{color:#f5f9ff!important}
+body.theme-piero .card small,body.theme-piero .list .item small,body.theme-piero .muted{color:#c4d3e7!important}
+body.theme-piero .ico{background:#263a5a!important;color:#fda4af!important}
+body.theme-piero .section-title button,body.theme-piero .month button{color:#fda4af!important}
+body.theme-piero .nav .active{color:#fda4af!important}
+body.theme-piero .nav .add{background:#090f1d!important;border:1px solid #fb7185!important;color:#fda4af!important}
 body.theme-piero .shell,body.theme-piero .nav{color:#f8fbff}
 body.theme-piero .brand b,body.theme-piero h1,body.theme-piero h2,body.theme-piero h3,body.theme-piero .month b,body.theme-piero .stat p b{color:#fff!important}
 body.theme-piero .brand small,body.theme-piero .muted,body.theme-piero .copy small,body.theme-piero .stat p,body.theme-piero .budget small{color:#cbd9eb!important}
