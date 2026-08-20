@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Sin Firebase Authentication estas reglas son temporalmente públicas.
+    match /movimientos/{id} { allow read, write: if request.time < timestamp.date(2026, 9, 19); }
+    match /categorias/{id} { allow read, write: if request.time < timestamp.date(2026, 9, 19); }
+    match /presupuestos/{id} { allow read, write: if request.time < timestamp.date(2026, 9, 19); }
+    match /configuracion/{id} { allow read, write: if request.time < timestamp.date(2026, 9, 19); }
+  }
+}
