@@ -6,7 +6,7 @@ const db=getFirestore(initializeApp(firebaseConfig));
 const cats=[['comida','Comida','🍜','GASTO'],['transporte','Transporte','🚗','GASTO'],['salidas','Salidas','✨','GASTO'],['entretenimiento','Entretenimiento','🎬','GASTO'],['compras','Compras','🛍️','GASTO'],['hogar','Hogar','⌂','GASTO'],['salud','Salud','✚','GASTO'],['estudios','Estudios','▣','GASTO'],['suscripciones','Suscripciones','↻','GASTO'],['viajes','Viajes','✈','GASTO'],['regalos','Regalos','🎁','GASTO'],['otros','Otros','•••','GASTO'],['sueldo','Sueldo','▤','INGRESO'],['pago','Pago','▤','INGRESO'],['freelance','Freelance','▤','INGRESO'],['reembolso','Reembolso','↶','INGRESO'],['otros-ingresos','Otros ingresos','＋','INGRESO']];
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN'}).format(+n||0), pad=n=>String(n).padStart(2,'0');
 const methods=['EFECTIVO','YAPE','PLIN','TARJETA','TRANSFERENCIA','OTRO'];
-const VERSION='v1.3.0';
+const VERSION='v1.3.1';
 const S={user:localStorage.ndUser||'',route:'home',month:ym(),moves:[],budget:null,edit:null};
 function today(){const d=new Date;return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}function ym(){return today().slice(0,7)}function moveMonth(delta){let[y,m]=S.month.split('-').map(Number);const d=new Date(y,m-1+delta,1);S.month=`${d.getFullYear()}-${pad(d.getMonth()+1)}`;load()}
 function monthName(){return new Intl.DateTimeFormat('es-PE',{month:'long',year:'numeric'}).format(new Date(`${S.month}-01T12:00:00`))}function cat(id){return cats.find(c=>c[0]===id)||['otros','Otros','•','GASTO']}
@@ -58,6 +58,10 @@ body.theme-piero .section-title button,body.theme-piero .month button{color:#fda
 body.theme-piero .chips .on,body.theme-piero .save{color:#fff!important;text-shadow:0 1px 1px #6b1027}
 </style>`);
 document.head.insertAdjacentHTML('beforeend',`<style>
+body.theme-piero{--card:#172742;--ice:#263a5a}
+body.theme-piero .stat [style*="background:var(--ice)"],body.theme-piero .stat span[style*="background:var(--card)"]{background:#223756!important;border:1px solid #3d587e;color:#f8fbff!important}
+body.theme-piero .stat [style*="background:var(--ice)"] small,body.theme-piero .stat span small{color:#cbd9eb!important}
+body.theme-piero .stat h2,body.theme-piero .stat b{color:#fff!important}
 .personas-three{grid-template-columns:repeat(3,1fr)!important}.personas-three button{min-width:0;padding:14px 4px;font-size:.84rem}.personas-three button:nth-child(2){background:linear-gradient(145deg,#0f172a,#0284c7);color:#fff;border-color:#38bdf8}
 body.theme-ambos{background:radial-gradient(circle at 15% 0,#d9f6ff 0,transparent 29%),radial-gradient(circle at 90% 100%,#ffe3ea 0,transparent 31%),#f4fbff}.theme-ambos .nav{background:#f8fdffed}.theme-ambos .nav .add{background:linear-gradient(145deg,#0f172a,#0284c7);border:1px solid #7dd3fc}.theme-ambos .card{background:linear-gradient(145deg,#fff,#f1faff)}
 </style>`);
