@@ -6,7 +6,7 @@ const db=getFirestore(initializeApp(firebaseConfig));
 const cats=[['comida','Comida','🍜','GASTO'],['transporte','Transporte','🚗','GASTO'],['salidas','Salidas','✨','GASTO'],['entretenimiento','Entretenimiento','🎬','GASTO'],['compras','Compras','🛍️','GASTO'],['hogar','Hogar','⌂','GASTO'],['salud','Salud','✚','GASTO'],['estudios','Estudios','▣','GASTO'],['suscripciones','Suscripciones','↻','GASTO'],['viajes','Viajes','✈','GASTO'],['regalos','Regalos','🎁','GASTO'],['otros','Otros','•••','GASTO'],['sueldo','Sueldo','▤','INGRESO'],['pago','Pago','▤','INGRESO'],['freelance','Freelance','▤','INGRESO'],['reembolso','Reembolso','↶','INGRESO'],['otros-ingresos','Otros ingresos','＋','INGRESO']];
 const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN'}).format(+n||0), pad=n=>String(n).padStart(2,'0');
 const methods=['EFECTIVO','YAPE','PLIN','TARJETA','TRANSFERENCIA','OTRO'];
-const VERSION='v1.2.0';
+const VERSION='v1.2.1';
 const S={user:localStorage.ndUser||'',route:'home',month:ym(),moves:[],budget:null,edit:null};
 function today(){const d=new Date;return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}function ym(){return today().slice(0,7)}function moveMonth(delta){let[y,m]=S.month.split('-').map(Number);const d=new Date(y,m-1+delta,1);S.month=`${d.getFullYear()}-${pad(d.getMonth()+1)}`;load()}
 function monthName(){return new Intl.DateTimeFormat('es-PE',{month:'long',year:'numeric'}).format(new Date(`${S.month}-01T12:00:00`))}function cat(id){return cats.find(c=>c[0]===id)||['otros','Otros','•','GASTO']}
@@ -31,6 +31,14 @@ body.theme-piero{background:#e8eef9}body.theme-mafer{background:#eaf8ff}body.the
 .theme-piero.nav{background:#edf3fd}.theme-mafer.nav{background:#f0fbff}.theme-piero.nav .add{background:#0f172a}.theme-mafer.nav .add{background:#0284c7}
 .theme-piero .brand b,.theme-piero .balance h1{color:#0b1d3d}.theme-mafer .brand b,.theme-mafer .balance h1{color:#075985}
 #movement-preview{display:block;margin:4px 0 8px;color:#0369a1;font-size:.8rem;font-weight:700}
+</style>`);
+document.head.insertAdjacentHTML('beforeend',`<style>
+body.theme-piero .shell,body.theme-piero .nav{color:#f8fbff}
+body.theme-piero .brand b,body.theme-piero h1,body.theme-piero h2,body.theme-piero h3,body.theme-piero .month b,body.theme-piero .stat p b{color:#fff!important}
+body.theme-piero .brand small,body.theme-piero .muted,body.theme-piero .copy small,body.theme-piero .stat p,body.theme-piero .budget small{color:#cbd9eb!important}
+body.theme-piero .item,body.theme-piero .grid b,body.theme-piero .balance p b{color:#f1f6ff!important}
+body.theme-piero .section-title button,body.theme-piero .month button{color:#fda4af!important}
+body.theme-piero .chips .on,body.theme-piero .save{color:#fff!important;text-shadow:0 1px 1px #6b1027}
 </style>`);
 function toast(t){let x=$('#toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2600)}
 async function saveMovementForm(form){
