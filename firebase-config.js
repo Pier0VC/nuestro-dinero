@@ -1,0 +1,1 @@
+export const firebaseConfig={apiKey:'AIzaSyAE6DWfbU6x2yFpw0k_kfGSRv6j4itb3Hg',authDomain:'zdgsda-46347.firebaseapp.com',projectId:'zdgsda-46347',storageBucket:'zdgsda-46347.firebasestorage.app',messagingSenderId:'1056102121965',appId:'1:1056102121965:web:226b97af6968b8c90ba7e4'};
